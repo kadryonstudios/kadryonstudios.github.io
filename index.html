@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kadryon Studios</title>
+<meta name="description" content="Kadryon Studios makes Roblox games, one world at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0b1018;
+    --panel: #111927;
+    --text: #ece6d6;
+    --muted: #9aa3b2;
+    --gold: #d9b26a;
+    --air: #cfe3ea;
+    --water: #3f7fb5;
+    --earth: #7d8a45;
+    --fire: #d6542a;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 28px 0; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .brand { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; letter-spacing: .12em; text-decoration: none; }
+  nav a { margin-left: 22px; color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav a:hover { color: var(--gold); }
+
+  .hero { padding: 72px 0 96px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(3.4rem, 10vw, 7rem);
+    line-height: .95;
+    letter-spacing: .06em;
+    margin: 0 0 24px;
+    color: var(--gold);
+  }
+  .hero p { font-size: 1.2rem; color: var(--muted); max-width: 32ch; margin: 0 0 32px; }
+  .button {
+    display: inline-block;
+    padding: 13px 26px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background .2s, color .2s;
+  }
+  .button:hover { background: var(--gold); color: var(--bg); }
+
+  .emblem { width: 100%; max-width: 320px; justify-self: center; }
+
+  section { padding: 72px 0; border-top: 1px solid rgba(217,178,106,.25); }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 2.2rem; margin: 0 0 12px; }
+  .lead { color: var(--muted); max-width: 52ch; margin: 0 0 40px; }
+
+  .game {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+    background: var(--panel);
+    padding: 24px;
+    border-left: 3px solid var(--gold);
+  }
+  .thumb {
+    aspect-ratio: 1;
+    background:
+      linear-gradient(135deg, var(--air) 0 25%, transparent 25%),
+      linear-gradient(225deg, var(--water) 0 25%, transparent 25%),
+      linear-gradient(315deg, var(--earth) 0 25%, transparent 25%),
+      linear-gradient(45deg, var(--fire) 0 25%, transparent 25%),
+      #1a2333;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: .85rem;
+    text-align: center;
+    padding: 12px;
+  }
+  .game h3 { font-family: var(--serif); font-size: 1.7rem; margin: 0 0 8px; }
+  .game p { margin: 0 0 20px; color: var(--muted); }
+  .elements { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
+  .elements li { padding: 4px 12px; font-size: .9rem; border: 1px solid; }
+  .e-air { color: var(--air); }
+  .e-water { color: #7fb4e0; }
+  .e-earth { color: #a5b565; }
+  .e-fire { color: #ef8057; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 16px; }
+  .links a { color: var(--text); padding-bottom: 2px; border-bottom: 1px solid var(--gold); text-decoration: none; }
+  .links a:hover { color: var(--gold); }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; border-top: 1px solid rgba(217,178,106,.25); }
+
+  @media (max-width: 720px) {
+    .hero { padding: 40px 0 64px; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .emblem { max-width: 200px; justify-self: start; }
+    .game { grid-template-columns: 1fr; }
+    .thumb { max-width: 220px; }
+    nav a { margin-left: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">KADRYON</a>
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Kadryon Studios</h1>
+        <p>We make Roblox games, one world at a time.</p>
+        <a class="button" href="#games">See our games</a>
+      </div>
+      <!-- Emblem: four elements around one center -->
+      <svg class="emblem" viewBox="0 0 200 200" role="img" aria-label="Kadryon emblem: four elements around one center">
+        <g transform="rotate(45 100 100)">
+          <rect x="30" y="30" width="70" height="70" fill="#cfe3ea"/>
+          <rect x="100" y="30" width="70" height="70" fill="#3f7fb5"/>
+          <rect x="30" y="100" width="70" height="70" fill="#7d8a45"/>
+          <rect x="100" y="100" width="70" height="70" fill="#d6542a"/>
+          <rect x="30" y="30" width="140" height="140" fill="none" stroke="#d9b26a" stroke-width="3"/>
+        </g>
+        <circle cx="100" cy="100" r="14" fill="#0b1018" stroke="#d9b26a" stroke-width="3"/>
+      </svg>
+    </div>
+  </div>
+
+  <section id="games">
+    <div class="wrap">
+      <h2>Games</h2>
+      <p class="lead">Each game is its own world. Older games stay online, so you can play them any time.</p>
+
+      <div class="game">
+        <div class="thumb">Add your game thumbnail here</div>
+        <div>
+          <h3>YOUR GAME NAME</h3>
+          <p>A Roblox game set in a world of four elements. Write one or two sentences about your game here.</p>
+          <ul class="elements">
+            <li class="e-air">Air</li>
+            <li class="e-water">Water</li>
+            <li class="e-earth">Earth</li>
+            <li class="e-fire">Fire</li>
+          </ul>
+          <!-- Replace the link below with your Roblox game link -->
+          <a class="button" href="https://www.roblox.com/">Play on Roblox</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="lead">Feedback, bug reports, and business inquiries are welcome.</p>
+      <div class="links">
+        <!-- Replace each # with your real link, delete the ones you don't use -->
+        <a href="#">YouTube</a>
+        <a href="#">Discord</a>
+        <a href="#">TikTok</a>
+        <a href="mailto:you@example.com">Email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Kadryon Studios. Not affiliated with Roblox Corporation.</div>
+</footer>
+
+</body>
+</html>
