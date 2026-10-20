@@ -6,146 +6,86 @@
 <title>Kadryon Studios</title>
 <meta name="description" content="Kadryon Studios is an independent Roblox studio. Every game gets its own world, and every world stays open.">
 <link rel="icon" href="logo.jpg">
-<script>
-  (function () {
-    var r = document.documentElement, t = null, w = null;
-    try { t = localStorage.getItem("kd-theme"); w = localStorage.getItem("kd-world"); } catch (e) {}
-    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-    r.setAttribute("data-theme", t);
-    r.classList.add("js");
-    if (w) r.style.setProperty("--h", w);
-  })();
-</script>
+<script>document.documentElement.classList.add("js");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @property --h { syntax: "<number>"; inherits: true; initial-value: 265; }
   :root {
-    --h: 265;
-    transition: --h .9s ease;
     color-scheme: dark;
     --bg: #000; --tile: #111113; --text: #f5f5f7; --muted: #a1a1a6; --line: rgba(255,255,255,.12);
-    --accent: hsl(var(--h) 90% 64%);
-    --accent-strong: hsl(var(--h) 80% 40%);
-    --glass: rgba(20,20,22,.62);
+    --accent: #fff;
+    --accent-strong: #f5f5f7;
     --sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
     --spring: cubic-bezier(.32, .72, 0, 1);
-  }
-  :root[data-theme="light"] {
-    color-scheme: light;
-    --bg: #f5f5f7; --tile: #fff; --text: #1d1d1f; --muted: #6e6e73; --line: rgba(0,0,0,.1);
-    --accent: hsl(var(--h) 90% 52%);
-    --glass: rgba(255,255,255,.7);
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  .fade, .fade * { transition: background-color .5s, color .5s, border-color .5s !important; }
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 32px); }
   main, footer { position: relative; z-index: 1; }
 
-  /* Living background */
-  .aura { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-  .blob { position: absolute; width: 52vmax; height: 52vmax; border-radius: 50%; filter: blur(90px); opacity: .32; background: hsl(var(--h) 90% 55%);
-    animation: drift 24s ease-in-out infinite alternate; translate: calc(var(--px, 0) * var(--k, 40px)) calc(var(--py, 0) * var(--k, 40px)); }
-  .blob:nth-child(1) { top: -18%; left: -12%; }
-  .blob:nth-child(2) { top: 22%; right: -18%; --k: -70px; background: hsl(calc(var(--h) + 60) 90% 55%); animation-duration: 30s; animation-delay: -8s; }
-  .blob:nth-child(3) { bottom: -24%; left: 26%; --k: 55px; background: hsl(calc(var(--h) - 50) 90% 55%); animation-duration: 36s; animation-delay: -16s; }
-  :root[data-theme="light"] .blob { opacity: .2; }
-  @keyframes drift { to { transform: translate(9vw, 7vh) scale(1.18) rotate(30deg); } }
-  #bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-  .spot { position: fixed; left: 0; top: 0; width: 680px; height: 680px; margin: -340px 0 0 -340px; border-radius: 50%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .5s;
-    background: radial-gradient(closest-side, hsl(var(--h) 90% 60% / .24), transparent); }
-  .spot.on { opacity: 1; }
-  .ring { position: fixed; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 30; opacity: 0;
-    transition: width .3s var(--spring), height .3s var(--spring), margin .3s var(--spring), opacity .3s, background .3s; }
-  .ring.on { opacity: .9; }
-  .ring.big { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: hsl(var(--h) 90% 60% / .14); }
-  .bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 40; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+  /* Static monochrome background keeps rendering light */
+  .aura { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 20%, #171717 0, #080808 42%, #000 78%); }
 
   /* Floating glass nav */
   nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 10; width: min(calc(100% - 28px), 720px);
     display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 14px; border-radius: 999px;
-    background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%); }
+    background: rgba(12,12,12,.96); border: 1px solid var(--line); }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: .95rem; }
   .mark { position: relative; width: 28px; height: 28px; border-radius: 50%; overflow: hidden; background: #0a0a0c; flex: none; }
-  .mark svg, .mark img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+  .mark img { width: 100%; height: 100%; display: block; object-fit: cover; }
   .links { display: flex; align-items: center; gap: 4px; }
   .links a { text-decoration: none; color: var(--muted); font-size: .9rem; padding: 8px 14px; border-radius: 999px; transition: color .2s, background .2s; }
   .links a:hover { color: var(--text); background: var(--line); }
-  .worlds { display: flex; gap: 7px; margin: 0 8px; }
-  .wd { width: 16px; height: 16px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; transition: transform .4s var(--spring), box-shadow .3s, translate .25s var(--spring); }
-  .wd:hover { transform: scale(1.25); }
-  .wd.on { box-shadow: 0 0 0 2px var(--glass), 0 0 0 4px var(--text); }
-  .toggle { width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--line); color: var(--text); display: grid; place-items: center; cursor: pointer; transition: transform .5s var(--spring), translate .25s var(--spring); }
-  .toggle:hover { transform: rotate(40deg) scale(1.08); }
-  .toggle svg { width: 17px; height: 17px; grid-area: 1/1; }
-  :root[data-theme="dark"] .i-moon, :root[data-theme="light"] .i-sun { display: none; }
 
   /* Hero */
   .hero { position: relative; min-height: 100svh; display: flex; align-items: center; text-align: center; padding: 120px 0 90px; }
   .hero .wrap { width: 100%; }
-  h1 { margin: 0 auto 24px; max-width: 11ch; font-size: clamp(3.4rem, 12.5vw, 9rem); font-weight: 700; line-height: .98; letter-spacing: -.05em; will-change: transform; }
-  h1 span { display: inline-block; opacity: 0; filter: blur(14px); transform: translateY(24px); animation: focus 1s var(--spring) forwards; }
+  h1 { margin: 0 auto 24px; max-width: 11ch; font-size: clamp(3.4rem, 12.5vw, 9rem); font-weight: 700; line-height: .98; letter-spacing: -.05em; }
+  h1 span { display: inline-block; }
   h1 span:nth-child(2) { animation-delay: .1s; } h1 span:nth-child(3) { animation-delay: .2s; } h1 span:nth-child(4) { animation-delay: .3s; } h1 span:nth-child(5) { animation-delay: .4s; }
-  h1 .g { background: linear-gradient(100deg, var(--accent), hsl(calc(var(--h) + 70) 90% 62%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  @keyframes focus { to { opacity: 1; filter: none; transform: none; } }
-  .sub { max-width: 38ch; margin: 0 auto 40px; font-size: clamp(1.1rem, 2.4vw, 1.4rem); color: var(--muted); opacity: 0; animation: show .9s .6s forwards; will-change: transform; }
-  @keyframes show { to { opacity: 1; } }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; opacity: 0; animation: show .9s .8s forwards; }
+  h1 .g { color: #fff; }
+  .sub { max-width: 38ch; margin: 0 auto 40px; font-size: clamp(1.1rem, 2.4vw, 1.4rem); color: var(--muted); }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
   .cue { position: absolute; bottom: 28px; left: 50%; width: 22px; height: 36px; margin-left: -11px; border: 1.5px solid var(--muted); border-radius: 14px; opacity: .7; }
-  .cue::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--muted); animation: wheel 1.8s ease-in-out infinite; }
-  @keyframes wheel { to { transform: translateY(12px); opacity: 0; } }
+  .cue::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--muted); }
 
   /* Marquee */
-  .marq { overflow: hidden; border-block: 1px solid var(--line); padding: 20px 0; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  .marq { overflow: hidden; border-block: 1px solid var(--line); padding: 20px 0; background: #080808;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-  .track { display: flex; width: max-content; animation: slide 30s linear infinite; }
-  .marq:hover .track { animation-play-state: paused; }
-  .track span { padding-right: 48px; white-space: nowrap; font-size: clamp(1.4rem, 3.6vw, 2.3rem); font-weight: 650; letter-spacing: -.025em; color: var(--muted); }
+  .track { display: flex; width: 100%; justify-content: space-around; flex-wrap: wrap; gap: 12px 22px; }
+  .track span { white-space: nowrap; font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 650; letter-spacing: -.025em; color: var(--muted); }
   .track span::after { content: "\2726"; margin-left: 48px; color: var(--accent); font-size: .7em; }
-  @keyframes slide { to { transform: translateX(-50%); } }
 
   /* Sections */
   section { padding: 88px 0; }
   h2 { margin: 0 0 12px; font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; }
   .lead { margin: 0 0 44px; color: var(--muted); font-size: 1.2rem; max-width: 42ch; }
-  .js .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--spring), transform 1s var(--spring); }
-  .js .rv.in { opacity: 1; transform: none; }
 
   /* Bento */
   .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(230px, auto); gap: 16px; }
-  .tile { position: relative; overflow: hidden; background: color-mix(in srgb, var(--tile) 72%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  .tile { position: relative; overflow: hidden; background: var(--tile);
     border: 1px solid var(--line); border-radius: 28px; padding: 28px; display: flex; flex-direction: column; }
-  .tile::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--h) 90% 60% / .2), transparent 60%); }
-  .tile:hover::before { opacity: 1; }
-  .js .tile { opacity: 0; transform: scale(.95) translateY(24px); }
-  .js .tile.in { opacity: 1; transform: none; transition: opacity .8s var(--spring), transform .9s var(--spring); transition-delay: var(--d, 0s); }
-  .js .tile.in.ready { transition: transform .25s ease-out; transition-delay: 0s; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+  .tile::before { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,.025); }
   .tile > * { position: relative; }
   .tile h3 { margin: 0 0 8px; font-size: 1.7rem; font-weight: 650; letter-spacing: -.025em; line-height: 1.12; }
   .tile p { margin: 0; color: var(--muted); }
   .game { grid-column: span 2; grid-row: span 2; padding: 0; }
   .art { aspect-ratio: 16/9; background: var(--bg); border-bottom: 1px solid var(--line); overflow: hidden; color: var(--accent); }
-  .art svg { width: 100%; height: 100%; display: block; transition: transform 1.2s var(--spring); }
-  .game:hover .art svg { transform: scale(1.06); }
+  .art svg { width: 100%; height: 100%; display: block; }
   .game .body { padding: 28px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
   .status { display: inline-flex; align-items: center; gap: 9px; font-size: .9rem; color: var(--muted); }
-  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 50% { opacity: .3; } }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
   .game h3 { font-size: clamp(2rem, 4.4vw, 2.8rem); margin: 0; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
   .chips li { padding: 5px 13px; border-radius: 999px; border: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
-  .btn { display: inline-block; align-self: flex-start; margin-top: auto; padding: 13px 26px; border-radius: 999px; background: var(--accent-strong); color: #fff; text-decoration: none; font-weight: 600; border: 1px solid transparent;
-    transition: transform .4s var(--spring), filter .2s, translate .25s var(--spring); }
-  .btn:hover { transform: scale(1.06); filter: brightness(1.12); }
-  .btn:active { transform: scale(.97); }
+  .btn { display: inline-flex; align-items: center; gap: 9px; align-self: flex-start; margin-top: auto; padding: 13px 26px; border-radius: 999px; background: #fff; color: #080808; text-decoration: none; font-weight: 600; border: 1px solid transparent; transition: background .2s, color .2s; }
+  .btn:hover { background: #d9d9d9; }
   .cta .btn { align-self: auto; margin-top: 0; padding: 15px 30px; font-size: 1.05rem; }
-  .btn.ghost { background: var(--glass); color: var(--text); border-color: var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .btn.ghost { background: #111; color: var(--text); border-color: var(--line); }
   .stack { position: relative; height: 70px; margin-top: auto; }
   .stack i { position: absolute; left: 0; right: 0; height: 44px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); transition: transform .6s var(--spring); }
   .stack i:nth-child(1) { bottom: 0; } .stack i:nth-child(2) { bottom: 12px; left: 10px; right: 10px; opacity: .7; } .stack i:nth-child(3) { bottom: 24px; left: 20px; right: 20px; opacity: .4; }
@@ -154,9 +94,13 @@
   .tile .go:hover { text-decoration: underline; text-underline-offset: 4px; }
 
   .pills { display: flex; flex-wrap: wrap; gap: 12px; }
-  .pill { padding: 16px 30px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); text-decoration: none; font-weight: 600; font-size: 1.1rem;
-    transition: transform .4s var(--spring), background .25s, color .25s, translate .25s var(--spring); }
-  .pill:hover { background: var(--accent-strong); color: #fff; transform: scale(1.06); }
+  .pill { display: inline-flex; align-items: center; gap: 10px; padding: 16px 24px; border-radius: 999px; background: #0c0c0c; border: 1px solid var(--line); text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background .2s, border-color .2s; }
+  .pill:hover { background: #1b1b1b; border-color: rgba(255,255,255,.35); }
+  .link-icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .brand-feature { display: flex; align-items: center; gap: clamp(24px, 5vw, 56px); margin-top: 64px; padding: clamp(22px, 5vw, 44px); border: 1px solid var(--line); border-radius: 28px; background: #0b0b0b; }
+  .brand-feature img { width: clamp(92px, 16vw, 148px); height: clamp(92px, 16vw, 148px); border-radius: 24px; object-fit: cover; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 14px 50px rgba(255,255,255,.1); }
+  .brand-feature h3 { margin: 0 0 8px; font-size: clamp(1.5rem, 3vw, 2rem); }
+  .brand-feature p { margin: 0; color: var(--muted); max-width: 40ch; }
 
   footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; border-top: 1px solid var(--line); padding-top: 28px; }
@@ -166,48 +110,27 @@
     .game { grid-column: auto; grid-row: auto; }
     .links a { display: none; }
   }
-  @media (hover: none) { .ring, .spot { display: none; } }
+  @media (max-width: 560px) { .brand-feature { align-items: flex-start; flex-direction: column; } }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
     h1 span, .sub, .cta { opacity: 1; filter: none; transform: none; }
-    .js .tile, .js .rv { opacity: 1; transform: none; }
-    .track { animation: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- Backup logo: drawn in code, shows only until logo.jpg loads (or if it is missing) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="mark" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#0a0a0c"/>
-    <text x="50" y="54" text-anchor="middle" fill="#f5f5f7" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="11.5" letter-spacing="2.4">KADRYON</text>
-  </symbol>
-</svg>
-
-<!-- Living background: drifting color, a particle web that reacts to the mouse, and a soft light that follows it -->
-<div class="aura" id="aura" aria-hidden="true"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
-<canvas id="bg" aria-hidden="true"></canvas>
-<div class="spot" id="spot" aria-hidden="true"></div>
-<div class="ring" id="ring" aria-hidden="true"></div>
-<div class="bar" id="bar" aria-hidden="true"></div>
+<div class="aura" aria-hidden="true"></div>
 
 <nav>
   <a class="brand" href="#top">
     <span class="mark">
-      <svg viewBox="0 0 100 100"><use href="#mark"/></svg>
-      <img src="logo.jpg" alt="" width="28" height="28" decoding="async" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
+      <img src="logo.jpg" alt="" width="28" height="28" decoding="async">
     </span>
     Kadryon
   </a>
   <div class="links">
     <a href="#games">Games</a>
     <a href="#contact">Contact</a>
-    <div class="worlds" id="worlds" role="group" aria-label="Change the color of the world"></div>
-    <button class="toggle" id="theme" type="button" aria-label="Switch between light and dark theme">
-      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-    </button>
   </div>
 </nav>
 
@@ -217,15 +140,15 @@
       <h1 id="h1"><span>Worlds,</span> <span>one</span> <span>at</span> <span>a</span> <span class="g">time.</span></h1>
       <p class="sub" id="sub">Kadryon Studios is an independent Roblox studio. Every game gets its own world, and every world stays open.</p>
       <div class="cta">
-        <a class="btn" href="#games">See our worlds</a>
+        <a class="btn" href="#games"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>See our worlds</a>
         <!-- Put your Discord invite link in place of the # -->
-        <a class="btn ghost" href="#">Join the Discord</a>
+        <a class="btn ghost" href="#"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8a10 10 0 0 1 8 0l2 9a12 12 0 0 1-4 2l-1-2m-6-9-2 9a12 12 0 0 0 4 2l1-2m-3-7h.01M15 12h.01M9 16c2 1 4 1 6 0"/></svg>Join the Discord</a>
       </div>
     </div>
     <span class="cue" aria-hidden="true"></span>
   </div>
 
-  <div class="marq" aria-hidden="true"><div class="track" id="track"><span>Independent</span><span>Built for Roblox</span><span>Every world stays open</span><span>Made with players</span></div></div>
+  <div class="marq" aria-label="Independent · Built for Roblox · Every world stays open · Made with players"><div class="track"><span>Independent</span><span>Built for Roblox</span><span>Every world stays open</span><span>Made with players</span></div></div>
 
   <section id="games">
     <div class="wrap">
@@ -277,10 +200,14 @@
       <p class="lead rv">Feedback, bug reports and business inquiries are all welcome.</p>
       <!-- Put your real links in place of each #, and delete the ones you don't use -->
       <div class="pills rv">
-        <a class="pill" href="#">YouTube</a>
-        <a class="pill" href="#">Discord</a>
-        <a class="pill" href="#">TikTok</a>
-        <a class="pill" href="mailto:you@example.com">Email</a>
+        <a class="pill" href="#"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 8a3 3 0 0 0-2-2c-1.8-.5-8-.5-8-.5s-6.2 0-8 .5a3 3 0 0 0-2 2A31 31 0 0 0 1.5 12 31 31 0 0 0 2 16a3 3 0 0 0 2 2c1.8.5 8 .5 8 .5s6.2 0 8-.5a3 3 0 0 0 2-2 31 31 0 0 0 .5-4 31 31 0 0 0-.5-4Z"/><path d="m10 9 5 3-5 3z"/></svg>YouTube</a>
+        <a class="pill" href="#"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8a10 10 0 0 1 8 0l2 9a12 12 0 0 1-4 2l-1-2m-6-9-2 9a12 12 0 0 0 4 2l1-2m-3-7h.01M15 12h.01M9 16c2 1 4 1 6 0"/></svg>Discord</a>
+        <a class="pill" href="#"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.5a4.5 4.5 0 1 1-4-4.47M14 4c.5 3 2.5 5 5.5 5.5"/></svg>TikTok</a>
+        <a class="pill" href="mailto:you@example.com"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+      </div>
+      <div class="brand-feature">
+        <img src="logo.jpg" alt="Kadryon Studios logo" width="148" height="148" loading="lazy" decoding="async">
+        <div><h3>Every world has a mark.</h3><p>Kadryon Studios builds distinct worlds for players to explore, revisit and make their own.</p></div>
       </div>
     </div>
   </section>
@@ -293,169 +220,6 @@
   </div>
 </footer>
 
-<script>
-  var root = document.documentElement;
-  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var mouse = matchMedia("(hover: hover)").matches;
-  var $ = function (s) { return document.querySelector(s); };
-  var M = { x: innerWidth / 2, y: innerHeight / 2, sx: innerWidth / 2, sy: innerHeight / 2, rx: innerWidth / 2, ry: innerHeight / 2, on: false };
-
-  /* Theme */
-  $("#theme").addEventListener("click", function () {
-    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    root.classList.add("fade");
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem("kd-theme", next); } catch (e) {}
-    setTimeout(function () { root.classList.remove("fade"); }, 550);
-  });
-
-  /* Worlds: the dots in the nav shift the accent color of the whole site */
-  var worlds = [["Dusk", 265], ["Tide", 205], ["Moss", 150], ["Ember", 18]];
-  var saved = parseFloat(root.style.getPropertyValue("--h")), wbox = $("#worlds"), dots = [];
-  worlds.forEach(function (w, i) {
-    var b = document.createElement("button");
-    b.type = "button"; b.className = "wd"; b.title = w[0]; b.setAttribute("aria-label", w[0]);
-    b.style.background = "hsl(" + w[1] + " 90% 60%)";
-    b.addEventListener("click", function () {
-      root.style.setProperty("--h", w[1]);
-      try { localStorage.setItem("kd-world", w[1]); } catch (e) {}
-      mark(i); burst(M.x, M.y, 140);
-    });
-    wbox.appendChild(b); dots.push(b);
-  });
-  function mark(i) { dots.forEach(function (d, k) { d.classList.toggle("on", k === i); }); }
-  mark(Math.max(0, worlds.findIndex(function (w) { return w[1] === saved; })));
-
-  /* Marquee: duplicate the words so the loop is seamless */
-  var track = $("#track"); track.innerHTML += track.innerHTML;
-
-  /* Background canvas: particle web that bends away from the cursor and joins to it */
-  var cv = $("#bg"), c = cv.getContext("2d"), W, H, P = [], R = [], hh = 265, fr = 0;
-  function hue() { return parseFloat(getComputedStyle(root).getPropertyValue("--h")) || 265; }
-  function mk() { var bx = (Math.random() - .5) * .4, by = (Math.random() - .5) * .4; return { x: Math.random() * W, y: Math.random() * H, bx: bx, by: by, vx: bx, vy: by, r: Math.random() * 1.6 + .7 }; }
-  function size() {
-    var d = Math.min(devicePixelRatio || 1, 2);
-    W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; c.setTransform(d, 0, 0, d, 0, 0);
-    var n = Math.min(110, Math.round(W * H / 12000));
-    while (P.length < n) P.push(mk());
-    P.length = n;
-  }
-  function burst(x, y, power) {
-    R.push({ x: x, y: y, r: 6, a: 1 });
-    P.forEach(function (p) {
-      var dx = p.x - x, dy = p.y - y, d = Math.sqrt(dx * dx + dy * dy) || 1;
-      if (d < 300) { var f = (300 - d) / 300 * (power / 20); p.vx += dx / d * f; p.vy += dy / d * f; }
-    });
-  }
-  function draw() {
-    fr++; if (fr % 8 === 1) hh = hue();
-    var dark = root.getAttribute("data-theme") === "dark", L = dark ? "72%" : "42%", i, j, p, q, dx, dy, d;
-    c.clearRect(0, 0, W, H);
-    for (i = 0; i < P.length; i++) {
-      p = P[i];
-      if (!calm) {
-        if (M.on) {
-          dx = p.x - M.x; dy = p.y - M.y; d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 150 && d > 1) { var f = (150 - d) / 150; p.vx += dx / d * f * .14; p.vy += dy / d * f * .14; }
-        }
-        p.vx += (p.bx - p.vx) * .02; p.vy += (p.by - p.vy) * .02;
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
-        if (p.y < -10) p.y = H + 10; else if (p.y > H + 10) p.y = -10;
-      }
-      for (j = i + 1; j < P.length; j++) {
-        q = P[j]; dx = p.x - q.x; dy = p.y - q.y; d = dx * dx + dy * dy;
-        if (d < 14400) { c.strokeStyle = "hsla(" + hh + ",90%," + L + "," + (1 - Math.sqrt(d) / 120) * .28 + ")"; c.beginPath(); c.moveTo(p.x, p.y); c.lineTo(q.x, q.y); c.stroke(); }
-      }
-      if (M.on) {
-        dx = p.x - M.x; dy = p.y - M.y; d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 210) { c.strokeStyle = "hsla(" + hh + ",95%," + L + "," + (1 - d / 210) * .7 + ")"; c.beginPath(); c.moveTo(p.x, p.y); c.lineTo(M.x, M.y); c.stroke(); }
-      }
-      c.fillStyle = "hsla(" + hh + ",90%," + L + ",.85)";
-      c.beginPath(); c.arc(p.x, p.y, p.r, 0, 6.2832); c.fill();
-    }
-    for (i = R.length - 1; i >= 0; i--) {
-      var r = R[i]; r.r += 5; r.a -= .02;
-      if (r.a <= 0) { R.splice(i, 1); continue; }
-      c.strokeStyle = "hsla(" + hh + ",95%," + L + "," + r.a * .6 + ")"; c.lineWidth = 2;
-      c.beginPath(); c.arc(r.x, r.y, r.r, 0, 6.2832); c.stroke(); c.lineWidth = 1;
-    }
-  }
-
-  /* One loop drives the background, the cursor light, the ring and the hero parallax */
-  var aura = $("#aura"), spot = $("#spot"), ring = $("#ring"), h1 = $("#h1"), sub = $("#sub"), bar = $("#bar");
-  var raf = 0;
-  function loop() {
-    raf = 0;
-    if (document.hidden || calm) return;
-    draw();
-    M.sx += (M.x - M.sx) * .1; M.sy += (M.y - M.sy) * .1;
-    M.rx += (M.x - M.rx) * .22; M.ry += (M.y - M.ry) * .22;
-    var nx = M.sx / innerWidth - .5, ny = M.sy / innerHeight - .5;
-    aura.style.setProperty("--px", nx.toFixed(3)); aura.style.setProperty("--py", ny.toFixed(3));
-    spot.style.transform = "translate(" + M.sx + "px," + M.sy + "px)";
-    ring.style.transform = "translate(" + M.rx + "px," + M.ry + "px)";
-    h1.style.transform = "translate(" + (-nx * 26).toFixed(1) + "px," + (-ny * 18).toFixed(1) + "px)";
-    sub.style.transform = "translate(" + (-nx * 12).toFixed(1) + "px," + (-ny * 8).toFixed(1) + "px)";
-    raf = requestAnimationFrame(loop);
-  }
-  size();
-  addEventListener("resize", function () { size(); if (calm) draw(); });
-  function animate() { if (!document.hidden && !calm && !raf) raf = requestAnimationFrame(loop); }
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; }
-    else if (!document.hidden) animate();
-  });
-  if (calm) draw(); else animate();
-
-  addEventListener("pointermove", function (e) {
-    M.x = e.clientX; M.y = e.clientY; M.on = true;
-    if (e.pointerType === "mouse") { spot.classList.add("on"); ring.classList.add("on"); }
-  });
-  addEventListener("pointerdown", function (e) { if (!calm) burst(e.clientX, e.clientY, 120); });
-  addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") M.on = false; });
-  root.addEventListener("mouseleave", function () { M.on = false; spot.classList.remove("on"); ring.classList.remove("on"); });
-  document.addEventListener("pointerover", function (e) { ring.classList.toggle("big", !!(e.target.closest && e.target.closest("a, button"))); });
-
-  /* Buttons and pills lean toward the pointer */
-  if (!calm && mouse) {
-    document.querySelectorAll(".btn, .pill, .toggle, .wd").forEach(function (el) {
-      el.addEventListener("pointermove", function (e) {
-        var r = el.getBoundingClientRect();
-        el.style.translate = ((e.clientX - r.left - r.width / 2) * .25) + "px " + ((e.clientY - r.top - r.height / 2) * .3) + "px";
-      });
-      el.addEventListener("pointerleave", function () { el.style.translate = ""; });
-    });
-  }
-
-  /* Tiles: glow and 3D tilt follow the pointer, and each one eases in as it scrolls into view */
-  var tiles = document.querySelectorAll(".tile");
-  tiles.forEach(function (t, i) {
-    t.style.setProperty("--d", (i * .12) + "s");
-    t.addEventListener("pointermove", function (e) {
-      var r = t.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-      t.style.setProperty("--mx", (e.clientX - r.left) + "px");
-      t.style.setProperty("--my", (e.clientY - r.top) + "px");
-      if (e.pointerType === "mouse" && !calm) { t.style.setProperty("--ry", (px * 9) + "deg"); t.style.setProperty("--rx", (-py * 9) + "deg"); }
-    });
-    t.addEventListener("pointerleave", function () { t.style.setProperty("--rx", "0deg"); t.style.setProperty("--ry", "0deg"); });
-  });
-  var items = document.querySelectorAll(".tile, .rv");
-  function show(el) { el.classList.add("in"); if (el.classList.contains("tile")) setTimeout(function () { el.classList.add("ready"); }, 1500); }
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (list) {
-      list.forEach(function (x) { if (x.isIntersecting) { show(x.target); io.unobserve(x.target); } });
-    }, { threshold: .15 });
-    items.forEach(function (t) { io.observe(t); });
-  } else { items.forEach(show); }
-
-  /* Scroll progress */
-  addEventListener("scroll", function () {
-    var m = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = "scaleX(" + (m > 0 ? scrollY / m : 0) + ")";
-  }, { passive: true });
-
-  $("#year").textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
