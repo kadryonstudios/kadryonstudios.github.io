@@ -177,7 +177,7 @@
 </head>
 <body>
 
-<!-- Backup logo: drawn in code, shows only until logo.png loads (or if it is missing) -->
+<!-- Backup logo: drawn in code, shows only until logo.jpg loads (or if it is missing) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="mark" viewBox="0 0 100 100">
     <rect width="100" height="100" fill="#0a0a0c"/>
@@ -196,7 +196,7 @@
   <a class="brand" href="#top">
     <span class="mark">
       <svg viewBox="0 0 100 100"><use href="#mark"/></svg>
-      <img src="logo.png" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
+      <img src="logo.jpg" alt="" width="28" height="28" decoding="async" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">
     </span>
     Kadryon
   </a>
@@ -384,7 +384,10 @@
 
   /* One loop drives the background, the cursor light, the ring and the hero parallax */
   var aura = $("#aura"), spot = $("#spot"), ring = $("#ring"), h1 = $("#h1"), sub = $("#sub"), bar = $("#bar");
+  var raf = 0;
   function loop() {
+    raf = 0;
+    if (document.hidden || calm) return;
     draw();
     M.sx += (M.x - M.sx) * .1; M.sy += (M.y - M.sy) * .1;
     M.rx += (M.x - M.rx) * .22; M.ry += (M.y - M.ry) * .22;
@@ -394,11 +397,16 @@
     ring.style.transform = "translate(" + M.rx + "px," + M.ry + "px)";
     h1.style.transform = "translate(" + (-nx * 26).toFixed(1) + "px," + (-ny * 18).toFixed(1) + "px)";
     sub.style.transform = "translate(" + (-nx * 12).toFixed(1) + "px," + (-ny * 8).toFixed(1) + "px)";
-    requestAnimationFrame(loop);
+    raf = requestAnimationFrame(loop);
   }
   size();
   addEventListener("resize", function () { size(); if (calm) draw(); });
-  if (calm) draw(); else requestAnimationFrame(loop);
+  function animate() { if (!document.hidden && !calm && !raf) raf = requestAnimationFrame(loop); }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; }
+    else if (!document.hidden) animate();
+  });
+  if (calm) draw(); else animate();
 
   addEventListener("pointermove", function (e) {
     M.x = e.clientX; M.y = e.clientY; M.on = true;
