@@ -204,7 +204,7 @@
 <div class="art"><svg viewBox="0 0 640 360" role="img" aria-label="Project preview"><g fill="none" stroke="currentColor" stroke-opacity=".35"><circle cx="320" cy="180" r="50"/><circle cx="320" cy="180" r="100"/><circle cx="320" cy="180" r="150"/><circle cx="320" cy="180" r="200"/><circle cx="320" cy="180" r="250"/></g><circle cx="320" cy="180" r="50" fill="currentColor" fill-opacity=".18"/><text x="320" y="186" text-anchor="middle" fill="currentColor" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600">Project preview</text></svg></div>
 <div class="body"><span class="status"><i></i><span data-i18n="ourServices">Our services</span></span><h3 data-i18n="robloxDevelopment">Roblox development</h3><p data-i18n="servicesDescription">We create Roblox games, design maps, and develop scripts to bring interactive ideas to life.</p><ul class="chips"><li data-i18n="games">Games</li><li data-i18n="maps">Maps</li><li data-i18n="scripts">Scripts</li></ul><a class="btn" href="index.html#contact" data-i18n="workWithUs">Work with us</a></div></article>
 <article class="tile open"><h3 data-i18n="builtWithCare">Built with care.</h3><p data-i18n="careDescription">We focus on thoughtful gameplay, detailed maps, and reliable scripts.</p><div class="stack" aria-hidden="true"><i></i><i></i><i></i></div></article>
-<article class="tile"><h3 data-i18n="foundedBy">Founded by Efe Yıldız.</h3><p data-i18n="companyDescription">Kadryon brings software development and Roblox creativity together.</p><a class="go" href="https://discord.gg/A7GsAvatuS" target="_blank" rel="noopener noreferrer" data-i18n="joinDiscord">Join the Discord</a></article>
+<article class="tile"><h3 data-i18n="foundedBy">Founded by Efe Yıldız.</h3><p data-i18n="companyDescription">Kadryon brings software development and Roblox creativity together.</p><a class="go" href="https://discord.gg/qzvZFR2Uh6" target="_blank" rel="noopener noreferrer" data-i18n="joinDiscord">Join the Discord</a></article>
 </div></div></section>
 </main><footer>
   <div class="wrap">
@@ -212,74 +212,8 @@
     <span data-i18n="disclaimer">Kadryon is an independent software company and is not affiliated with Roblox Corporation.</span>
   </div>
 </footer>
+<script src="language.js" defer></script>
 <script>
-
-  var translations = {
-    tr: {
-      navContact: "İletişim", projectsTitle: "Projelerimiz.", projectsDescription: "Kadryon tarafından geliştirilen Roblox oyunları, haritalar ve scriptler.", backHome: "Ana sayfaya dön",
-      projectsLabel: "Roblox projeleri", ourServices: "Hizmetlerimiz", robloxDevelopment: "Roblox geliştirme",
-      servicesDescription: "Etkileşimli fikirleri hayata geçirmek için Roblox oyunları geliştiriyor, haritalar tasarlıyor ve scriptler yazıyoruz.",
-      games: "Oyunlar", maps: "Haritalar", scripts: "Scriptler", workWithUs: "Bizimle çalışın",
-      builtWithCare: "Özenle geliştirildi.", careDescription: "Özenli oynanışa, detaylı haritalara ve güvenilir scriptlere odaklanıyoruz.",
-      foundedBy: "Efe Yıldız tarafından kuruldu.", companyDescription: "Kadryon, yazılım geliştirmeyi Roblox yaratıcılığıyla buluşturuyor.",
-      joinDiscord: "Discord'a katıl", disclaimer: "Kadryon bağımsız bir yazılım stüdyosudur ve Roblox Corporation ile bağlantısı yoktur.",
-      title: "Projeler | Kadryon Studios — Roblox Oyunları ve Haritalar",
-      description: "Kadryon Studios projelerini keşfedin: Roblox oyun geliştirme, özgün harita tasarımı ve script hizmetleri."
-    },
-    en: {
-      navContact: "Contact", projectsTitle: "Our projects.", projectsDescription: "Roblox games, maps, and scripts made by Kadryon.", backHome: "Back to home",
-      projectsLabel: "Roblox projects", ourServices: "Our services", robloxDevelopment: "Roblox development",
-      servicesDescription: "We create Roblox games, design maps, and develop scripts to bring interactive ideas to life.",
-      games: "Games", maps: "Maps", scripts: "Scripts", workWithUs: "Work with us",
-      builtWithCare: "Built with care.", careDescription: "We focus on thoughtful gameplay, detailed maps, and reliable scripts.",
-      foundedBy: "Founded by Efe Yıldız.", companyDescription: "Kadryon brings software development and Roblox creativity together.",
-      joinDiscord: "Join the Discord", disclaimer: "Kadryon is an independent software company and is not affiliated with Roblox Corporation.",
-      title: "Projects | Kadryon Studios — Roblox Games and Maps",
-      description: "Explore Kadryon's Roblox games, maps, and scripts."
-    }
-  };
-  var languageButtons = document.querySelectorAll("[data-language]");
-  function applyLanguage(language) {
-    var copy = translations[language] || translations.en;
-    document.documentElement.lang = language;
-    document.title = copy.title;
-    document.querySelector('meta[name="description"]').content = copy.description;
-    document.querySelector('meta[property="og:title"]').content = copy.title;
-    document.querySelector('meta[property="og:description"]').content = copy.description;
-    document.querySelector('meta[name="twitter:title"]').content = copy.title;
-    document.querySelector('meta[name="twitter:description"]').content = copy.description;
-    document.querySelectorAll("[data-i18n]").forEach(function (element) {
-      var key = element.getAttribute("data-i18n");
-      if (copy[key]) element.textContent = copy[key];
-    });
-    var labeledSection = document.querySelector("[data-i18n-aria]");
-    if (labeledSection) labeledSection.setAttribute("aria-label", copy[labeledSection.getAttribute("data-i18n-aria")]);
-    languageButtons.forEach(function (button) { button.setAttribute("aria-pressed", button.getAttribute("data-language") === language ? "true" : "false"); });
-  }
-  languageButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      var language = button.getAttribute("data-language");
-      languageWasChosen = true;
-      try { localStorage.setItem("kd-language", language); } catch (e) {}
-      applyLanguage(language);
-    });
-  });
-  var savedLanguage = null;
-  try { savedLanguage = localStorage.getItem("kd-language"); } catch (e) {}
-  var languageWasChosen = savedLanguage === "tr" || savedLanguage === "en";
-  if (savedLanguage === "tr" || savedLanguage === "en") {
-    applyLanguage(savedLanguage);
-  } else {
-    var preferredLanguage = (navigator.language || "en").toLowerCase();
-    var preferredTimezone = "";
-    try { preferredTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
-    applyLanguage(preferredLanguage.indexOf("tr") === 0 || preferredTimezone === "Europe/Istanbul" ? "tr" : "en");
-    fetch("https://ipapi.co/json/", { headers: { Accept: "application/json" }, cache: "no-store" })
-      .then(function (response) { if (!response.ok) throw new Error("Location lookup failed"); return response.json(); })
-      .then(function (location) { if (!languageWasChosen && location && location.country_code) applyLanguage(location.country_code === "TR" ? "tr" : "en"); })
-      .catch(function () {});
-  }
-
   document.getElementById("year").textContent = new Date().getFullYear();
   var root = document.documentElement, themeButton = document.getElementById("theme-toggle");
   function updateThemeButton() {
