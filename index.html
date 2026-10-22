@@ -78,6 +78,9 @@
   .theme-toggle { width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--text); cursor: pointer; transition: transform .25s var(--spring), background .2s; }
   .theme-toggle:hover { transform: rotate(12deg); background: var(--surface-hover); }
   .theme-toggle svg { width: 17px; height: 17px; }
+  .language-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .language-toggle button { min-width: 38px; padding: 7px 9px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+  .language-toggle button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
   :root[data-theme="dark"] .sun-icon, :root[data-theme="light"] .moon-icon { display: none; }
 
   /* Hero */
@@ -187,8 +190,12 @@
     Kadryon
   </a>
   <div class="links">
-    <a href="projects.html">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="projects.html" data-i18n="navProjects">Projects</a>
+    <a href="#contact" data-i18n="navContact">Contact</a>
+    <div class="language-toggle" role="group" aria-label="Language">
+      <button type="button" data-language="tr" aria-pressed="false">TR</button>
+      <button type="button" data-language="en" aria-pressed="true">EN</button>
+    </div>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
       <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13A8.5 8.5 0 0 1 11 3.2 8.8 8.8 0 1 0 20.8 13Z"/></svg>
@@ -199,23 +206,23 @@
 <main id="top">
   <div class="hero" id="hero">
     <div class="wrap">
-      <h1 id="h1"><span>Worlds,</span> <span>one</span> <span>at</span> <span>a</span> <span class="g">time.</span></h1>
-      <p class="sub" id="sub">Kadryon is a software company founded by Efe Yıldız. We create Roblox games, maps, and scripts.</p>
+      <h1 id="h1" data-i18n="heroTitle">Worlds, one at a time.</h1>
+      <p class="sub" id="sub" data-i18n="heroDescription">Kadryon is a software company founded by Efe Yıldız. We create Roblox games, maps, and scripts.</p>
       <div class="cta">
-        <a class="btn" href="projects.html"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>Explore our work</a>
+        <a class="btn" href="projects.html"><svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><span data-i18n="explore">Explore our work</span></a>
         <!-- Put your Discord invite link in place of the # -->
-        <a class="btn ghost" href="https://discord.gg/A7GsAvatuS" target="_blank" rel="noopener noreferrer"><svg class="link-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.7 5.2A18.8 18.8 0 0 0 15 3.8l-.6 1.3a17.4 17.4 0 0 0-4.8 0L9 3.8a18.8 18.8 0 0 0-4.7 1.4C1.3 9.6.5 13.9.9 18.2a19 19 0 0 0 5.8 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.6 13.6 0 0 0 11 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a19 19 0 0 0 5.8-2.9c.5-5-.8-9.2-3.4-13ZM8.7 14.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Zm6.6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"/></svg>Join the Discord</a>
+        <a class="btn ghost" href="https://discord.gg/A7GsAvatuS" target="_blank" rel="noopener noreferrer"><svg class="link-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.7 5.2A18.8 18.8 0 0 0 15 3.8l-.6 1.3a17.4 17.4 0 0 0-4.8 0L9 3.8a18.8 18.8 0 0 0-4.7 1.4C1.3 9.6.5 13.9.9 18.2a19 19 0 0 0 5.8 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.6 13.6 0 0 0 11 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a19 19 0 0 0 5.8-2.9c.5-5-.8-9.2-3.4-13ZM8.7 14.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Zm6.6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"/></svg><span data-i18n="joinDiscord">Join the Discord</span></a>
       </div>
     </div>
     <span class="cue" aria-hidden="true"></span>
   </div>
 
-  <div class="marq" aria-label="Software development · Roblox games · Maps · Scripts"><div class="track"><span>Software development</span><span>Roblox games</span><span>Maps</span><span>Scripts</span></div></div>
+  <div class="marq" aria-label="Software development · Roblox games · Maps · Scripts"><div class="track"><span data-i18n="serviceSoftware">Software development</span><span data-i18n="serviceGames">Roblox games</span><span data-i18n="serviceMaps">Maps</span><span data-i18n="serviceScripts">Scripts</span></div></div>
 
   <section id="contact">
     <div class="wrap">
-      <h2 class="rv">Let’s work together.</h2>
-      <p class="lead rv">Contact us about Roblox games, maps, scripts, or software projects.</p>
+      <h2 class="rv" data-i18n="contactTitle">Let’s work together.</h2>
+      <p class="lead rv" data-i18n="contactDescription">Contact us about Roblox games, maps, scripts, or software projects.</p>
       <!-- Put your real links in place of each #, and delete the ones you don't use -->
       <div class="pills rv">
         <a class="pill" href="https://www.youtube.com/@kadryonstudios" target="_blank" rel="noopener noreferrer"><svg class="link-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a>
@@ -225,7 +232,7 @@
       </div>
       <div class="brand-feature">
         <img src="logo.png" alt="Kadryon Studios logo" width="148" height="148" loading="lazy" decoding="async">
-        <div><h3>Ideas into experiences.</h3><p>Founded by Efe Yıldız, Kadryon is a software company creating Roblox games, maps, and scripts.</p></div>
+        <div><h3 data-i18n="featureTitle">Ideas into experiences.</h3><p data-i18n="featureDescription">Founded by Efe Yıldız, Kadryon is a software company creating Roblox games, maps, and scripts.</p></div>
       </div>
     </div>
   </section>
@@ -234,11 +241,77 @@
 <footer>
   <div class="wrap">
     <span>&copy; <span id="year">2026</span> Kadryon Studios</span>
-    <span>Kadryon is an independent software company and is not affiliated with Roblox Corporation.</span>
+    <span data-i18n="disclaimer">Kadryon is an independent software company and is not affiliated with Roblox Corporation.</span>
   </div>
 </footer>
 
 <script>
+  var translations = {
+    tr: {
+      navProjects: "Projeler", navContact: "İletişim", heroTitle: "Her seferinde yeni dünyalar.",
+      heroDescription: "Efe Yıldız tarafından kurulan Kadryon bir yazılım stüdyosudur. Roblox oyunları, haritaları ve scriptleri geliştiriyoruz.",
+      explore: "Projelerimizi keşfet", joinDiscord: "Discord'a katıl", serviceSoftware: "Yazılım geliştirme",
+      serviceGames: "Roblox oyunları", serviceMaps: "Haritalar", serviceScripts: "Scriptler",
+      contactTitle: "Birlikte çalışalım.", contactDescription: "Roblox oyunları, haritaları, scriptleri veya yazılım projeleri için bize ulaşın.",
+      featureTitle: "Fikirleri deneyimlere dönüştürüyoruz.", featureDescription: "Efe Yıldız tarafından kurulan Kadryon; Roblox oyunları, haritaları ve scriptleri geliştiren bir yazılım stüdyosudur.",
+      disclaimer: "Kadryon bağımsız bir yazılım stüdyosudur ve Roblox Corporation ile bağlantısı yoktur.",
+      title: "Kadryon Studios | Roblox Oyun, Harita ve Yazılım Geliştirme",
+      description: "Kadryon Studios, Efe Yıldız tarafından kurulan bir yazılım stüdyosudur. Roblox oyunları, haritaları ve scriptleri geliştiriyoruz."
+    },
+    en: {
+      navProjects: "Projects", navContact: "Contact", heroTitle: "Worlds, one at a time.",
+      heroDescription: "Kadryon is a software company founded by Efe Yıldız. We create Roblox games, maps, and scripts.",
+      explore: "Explore our work", joinDiscord: "Join the Discord", serviceSoftware: "Software development",
+      serviceGames: "Roblox games", serviceMaps: "Maps", serviceScripts: "Scripts",
+      contactTitle: "Let’s work together.", contactDescription: "Contact us about Roblox games, maps, scripts, or software projects.",
+      featureTitle: "Ideas into experiences.", featureDescription: "Founded by Efe Yıldız, Kadryon is a software company creating Roblox games, maps, and scripts.",
+      disclaimer: "Kadryon is an independent software company and is not affiliated with Roblox Corporation.",
+      title: "Kadryon Studios | Roblox Game, Map and Software Development",
+      description: "Kadryon is a software company founded by Efe Yıldız, creating Roblox games, maps, and scripts."
+    }
+  };
+  var languageButtons = document.querySelectorAll("[data-language]");
+  function applyLanguage(language) {
+    var copy = translations[language] || translations.en;
+    document.documentElement.lang = language;
+    document.title = copy.title;
+    document.querySelector('meta[name="description"]').content = copy.description;
+    document.querySelector('meta[property="og:title"]').content = copy.title;
+    document.querySelector('meta[property="og:description"]').content = copy.description;
+    document.querySelector('meta[name="twitter:title"]').content = copy.title;
+    document.querySelector('meta[name="twitter:description"]').content = copy.description;
+    document.querySelectorAll("[data-i18n]").forEach(function (element) {
+      var key = element.getAttribute("data-i18n");
+      if (copy[key]) element.textContent = copy[key];
+    });
+    languageButtons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.getAttribute("data-language") === language ? "true" : "false");
+    });
+  }
+  languageButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var language = button.getAttribute("data-language");
+      languageWasChosen = true;
+      try { localStorage.setItem("kd-language", language); } catch (e) {}
+      applyLanguage(language);
+    });
+  });
+  var savedLanguage = null;
+  try { savedLanguage = localStorage.getItem("kd-language"); } catch (e) {}
+  var languageWasChosen = savedLanguage === "tr" || savedLanguage === "en";
+  if (savedLanguage === "tr" || savedLanguage === "en") {
+    applyLanguage(savedLanguage);
+  } else {
+    var preferredLanguage = (navigator.language || "en").toLowerCase();
+    var preferredTimezone = "";
+    try { preferredTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+    applyLanguage(preferredLanguage.indexOf("tr") === 0 || preferredTimezone === "Europe/Istanbul" ? "tr" : "en");
+    fetch("https://ipapi.co/json/", { headers: { Accept: "application/json" }, cache: "no-store" })
+      .then(function (response) { if (!response.ok) throw new Error("Location lookup failed"); return response.json(); })
+      .then(function (location) { if (!languageWasChosen && location && location.country_code) applyLanguage(location.country_code === "TR" ? "tr" : "en"); })
+      .catch(function () {});
+  }
+
   document.getElementById("year").textContent = new Date().getFullYear();
   var root = document.documentElement, themeButton = document.getElementById("theme-toggle");
   function updateThemeButton() {

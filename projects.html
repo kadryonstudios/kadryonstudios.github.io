@@ -80,6 +80,9 @@
   .theme-toggle { width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--text); cursor: pointer; transition: transform .25s var(--spring), background .2s; }
   .theme-toggle:hover { transform: rotate(12deg); background: var(--surface-hover); }
   .theme-toggle svg { width: 17px; height: 17px; }
+  .language-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .language-toggle button { min-width: 38px; padding: 7px 9px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+  .language-toggle button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
   :root[data-theme="dark"] .sun-icon, :root[data-theme="light"] .moon-icon { display: none; }
 
   /* Hero */
@@ -189,27 +192,93 @@
     </span>
     Kadryon
   </a>
-<div class="links"><a href="index.html#contact">Contact</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+<div class="links"><a href="index.html#contact" data-i18n="navContact">Contact</a><div class="language-toggle" role="group" aria-label="Language"><button type="button" data-language="tr" aria-pressed="false">TR</button><button type="button" data-language="en" aria-pressed="true">EN</button></div><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
       <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13A8.5 8.5 0 0 1 11 3.2 8.8 8.8 0 1 0 20.8 13Z"/></svg>
     </button></div>
 </nav>
 <main id="top">
-<section class="projects-hero"><div class="wrap"><h1 class="rv">Our projects.</h1><p class="lead rv">Roblox games, maps, and scripts made by Kadryon.</p><a class="btn back-link" href="index.html">Back to home</a></div></section>
-<section aria-label="Roblox projects"><div class="wrap"><div class="bento">
+<section class="projects-hero"><div class="wrap"><h1 class="rv" data-i18n="projectsTitle">Our projects.</h1><p class="lead rv" data-i18n="projectsDescription">Roblox games, maps, and scripts made by Kadryon.</p><a class="btn back-link" href="index.html" data-i18n="backHome">Back to home</a></div></section>
+<section aria-label="Roblox projects" data-i18n-aria="projectsLabel"><div class="wrap"><div class="bento">
 <article class="tile game">
 <div class="art"><svg viewBox="0 0 640 360" role="img" aria-label="Project preview"><g fill="none" stroke="currentColor" stroke-opacity=".35"><circle cx="320" cy="180" r="50"/><circle cx="320" cy="180" r="100"/><circle cx="320" cy="180" r="150"/><circle cx="320" cy="180" r="200"/><circle cx="320" cy="180" r="250"/></g><circle cx="320" cy="180" r="50" fill="currentColor" fill-opacity=".18"/><text x="320" y="186" text-anchor="middle" fill="currentColor" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600">Project preview</text></svg></div>
-<div class="body"><span class="status"><i></i>Our services</span><h3>Roblox development</h3><p>We create Roblox games, design maps, and develop scripts to bring interactive ideas to life.</p><ul class="chips"><li>Games</li><li>Maps</li><li>Scripts</li></ul><a class="btn" href="index.html#contact">Work with us</a></div></article>
-<article class="tile open"><h3>Built with care.</h3><p>We focus on thoughtful gameplay, detailed maps, and reliable scripts.</p><div class="stack" aria-hidden="true"><i></i><i></i><i></i></div></article>
-<article class="tile"><h3>Founded by Efe Yıldız.</h3><p>Kadryon brings software development and Roblox creativity together.</p><a class="go" href="https://discord.gg/A7GsAvatuS" target="_blank" rel="noopener noreferrer">Join the Discord</a></article>
+<div class="body"><span class="status"><i></i><span data-i18n="ourServices">Our services</span></span><h3 data-i18n="robloxDevelopment">Roblox development</h3><p data-i18n="servicesDescription">We create Roblox games, design maps, and develop scripts to bring interactive ideas to life.</p><ul class="chips"><li data-i18n="games">Games</li><li data-i18n="maps">Maps</li><li data-i18n="scripts">Scripts</li></ul><a class="btn" href="index.html#contact" data-i18n="workWithUs">Work with us</a></div></article>
+<article class="tile open"><h3 data-i18n="builtWithCare">Built with care.</h3><p data-i18n="careDescription">We focus on thoughtful gameplay, detailed maps, and reliable scripts.</p><div class="stack" aria-hidden="true"><i></i><i></i><i></i></div></article>
+<article class="tile"><h3 data-i18n="foundedBy">Founded by Efe Yıldız.</h3><p data-i18n="companyDescription">Kadryon brings software development and Roblox creativity together.</p><a class="go" href="https://discord.gg/A7GsAvatuS" target="_blank" rel="noopener noreferrer" data-i18n="joinDiscord">Join the Discord</a></article>
 </div></div></section>
 </main><footer>
   <div class="wrap">
     <span>&copy; <span id="year">2026</span> Kadryon Studios</span>
-    <span>Kadryon is an independent software company and is not affiliated with Roblox Corporation.</span>
+    <span data-i18n="disclaimer">Kadryon is an independent software company and is not affiliated with Roblox Corporation.</span>
   </div>
 </footer>
 <script>
+
+  var translations = {
+    tr: {
+      navContact: "İletişim", projectsTitle: "Projelerimiz.", projectsDescription: "Kadryon tarafından geliştirilen Roblox oyunları, haritalar ve scriptler.", backHome: "Ana sayfaya dön",
+      projectsLabel: "Roblox projeleri", ourServices: "Hizmetlerimiz", robloxDevelopment: "Roblox geliştirme",
+      servicesDescription: "Etkileşimli fikirleri hayata geçirmek için Roblox oyunları geliştiriyor, haritalar tasarlıyor ve scriptler yazıyoruz.",
+      games: "Oyunlar", maps: "Haritalar", scripts: "Scriptler", workWithUs: "Bizimle çalışın",
+      builtWithCare: "Özenle geliştirildi.", careDescription: "Özenli oynanışa, detaylı haritalara ve güvenilir scriptlere odaklanıyoruz.",
+      foundedBy: "Efe Yıldız tarafından kuruldu.", companyDescription: "Kadryon, yazılım geliştirmeyi Roblox yaratıcılığıyla buluşturuyor.",
+      joinDiscord: "Discord'a katıl", disclaimer: "Kadryon bağımsız bir yazılım stüdyosudur ve Roblox Corporation ile bağlantısı yoktur.",
+      title: "Projeler | Kadryon Studios — Roblox Oyunları ve Haritalar",
+      description: "Kadryon Studios projelerini keşfedin: Roblox oyun geliştirme, özgün harita tasarımı ve script hizmetleri."
+    },
+    en: {
+      navContact: "Contact", projectsTitle: "Our projects.", projectsDescription: "Roblox games, maps, and scripts made by Kadryon.", backHome: "Back to home",
+      projectsLabel: "Roblox projects", ourServices: "Our services", robloxDevelopment: "Roblox development",
+      servicesDescription: "We create Roblox games, design maps, and develop scripts to bring interactive ideas to life.",
+      games: "Games", maps: "Maps", scripts: "Scripts", workWithUs: "Work with us",
+      builtWithCare: "Built with care.", careDescription: "We focus on thoughtful gameplay, detailed maps, and reliable scripts.",
+      foundedBy: "Founded by Efe Yıldız.", companyDescription: "Kadryon brings software development and Roblox creativity together.",
+      joinDiscord: "Join the Discord", disclaimer: "Kadryon is an independent software company and is not affiliated with Roblox Corporation.",
+      title: "Projects | Kadryon Studios — Roblox Games and Maps",
+      description: "Explore Kadryon's Roblox games, maps, and scripts."
+    }
+  };
+  var languageButtons = document.querySelectorAll("[data-language]");
+  function applyLanguage(language) {
+    var copy = translations[language] || translations.en;
+    document.documentElement.lang = language;
+    document.title = copy.title;
+    document.querySelector('meta[name="description"]').content = copy.description;
+    document.querySelector('meta[property="og:title"]').content = copy.title;
+    document.querySelector('meta[property="og:description"]').content = copy.description;
+    document.querySelector('meta[name="twitter:title"]').content = copy.title;
+    document.querySelector('meta[name="twitter:description"]').content = copy.description;
+    document.querySelectorAll("[data-i18n]").forEach(function (element) {
+      var key = element.getAttribute("data-i18n");
+      if (copy[key]) element.textContent = copy[key];
+    });
+    var labeledSection = document.querySelector("[data-i18n-aria]");
+    if (labeledSection) labeledSection.setAttribute("aria-label", copy[labeledSection.getAttribute("data-i18n-aria")]);
+    languageButtons.forEach(function (button) { button.setAttribute("aria-pressed", button.getAttribute("data-language") === language ? "true" : "false"); });
+  }
+  languageButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var language = button.getAttribute("data-language");
+      languageWasChosen = true;
+      try { localStorage.setItem("kd-language", language); } catch (e) {}
+      applyLanguage(language);
+    });
+  });
+  var savedLanguage = null;
+  try { savedLanguage = localStorage.getItem("kd-language"); } catch (e) {}
+  var languageWasChosen = savedLanguage === "tr" || savedLanguage === "en";
+  if (savedLanguage === "tr" || savedLanguage === "en") {
+    applyLanguage(savedLanguage);
+  } else {
+    var preferredLanguage = (navigator.language || "en").toLowerCase();
+    var preferredTimezone = "";
+    try { preferredTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+    applyLanguage(preferredLanguage.indexOf("tr") === 0 || preferredTimezone === "Europe/Istanbul" ? "tr" : "en");
+    fetch("https://ipapi.co/json/", { headers: { Accept: "application/json" }, cache: "no-store" })
+      .then(function (response) { if (!response.ok) throw new Error("Location lookup failed"); return response.json(); })
+      .then(function (location) { if (!languageWasChosen && location && location.country_code) applyLanguage(location.country_code === "TR" ? "tr" : "en"); })
+      .catch(function () {});
+  }
 
   document.getElementById("year").textContent = new Date().getFullYear();
   var root = document.documentElement, themeButton = document.getElementById("theme-toggle");
