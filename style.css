@@ -215,6 +215,9 @@ a.contact-row:hover { background: var(--surface-hover); }
 .site-footer { padding: 30px 0 38px; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
 .footer-brand { color: var(--text); font-size: 11px; }
+.footer-socials { display: flex; align-items: center; gap: 14px; }
+.footer-socials a { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); text-decoration: none; transition: color .2s ease,border-color .2s ease,background .2s ease; }
+.footer-socials a:hover { border-color: var(--line-strong); background: var(--surface); color: var(--text); }
 .footer-brand .brand-logo { width: 34px; height: 34px; border-radius: 50%; }
 
 /* Profile page */
