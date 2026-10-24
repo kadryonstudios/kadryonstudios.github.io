@@ -372,9 +372,9 @@ a.contact-row:hover { background: var(--surface-hover); }
 
 /* Google AdSense placements */
 .ad-slot { position: relative; z-index: 2; display: block; overflow: hidden; background: var(--bg); }
-.ad-slot-top,.ad-slot-bottom { width: min(100% - 48px, 970px); min-height: 90px; margin: 18px auto; }
-.ad-slot-left,.ad-slot-right { position: fixed; z-index: 40; top: 50%; width: 160px; min-height: 600px; transform: translateY(-50%); }
+.ad-slot-top,.ad-slot-bottom { width: min(100% - 48px, 970px); margin: 18px auto; }
+.ad-slot-left,.ad-slot-right { position: fixed; z-index: 40; top: 50%; width: 160px; transform: translateY(-50%); }
 .ad-slot-left { left: 8px; }
 .ad-slot-right { right: 8px; }
 @media (max-width: 1400px) { .ad-slot-left,.ad-slot-right { display: none; } }
-@media (max-width: 600px) { .ad-slot-top,.ad-slot-bottom { width: calc(100% - 28px); min-height: 50px; margin: 12px auto; } }
+@media (max-width: 600px) { .ad-slot-top,.ad-slot-bottom { width: calc(100% - 28px); margin: 12px auto; } }
